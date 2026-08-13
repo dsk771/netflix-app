@@ -16,9 +16,11 @@ jobs:
         distribution: 'temurin'
     - name: Install Gradle
       run: |
-        wget -q https://services.gradle.org/distributions/gradle-8.4.2-bin.zip
-        unzip -q gradle-8.4.2-bin.zip
-        echo "$PWD/gradle-8.4.2/bin" >> $GITHUB_PATH
+        echo "Téléchargement de Gradle 8.5..."
+        curl -L --retry 3 --retry-delay 5 -o gradle.zip https://services.gradle.org/distributions/gradle-8.5-bin.zip
+        ls -la gradle.zip
+        unzip -q gradle.zip
+        echo "$PWD/gradle-8.5/bin" >> $GITHUB_PATH
     - name: Build APK
       run: gradle assembleDebug --no-daemon
     - name: Upload APK
